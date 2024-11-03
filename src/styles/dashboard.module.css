@@ -1,0 +1,13 @@
+/* src/styles/dashboard.module.css */
+
+
+
+
+
+.infoBlock {
+    flex: 1;
+    background-color: #f0f0f0;
+    padding: 1.5rem;
+    text-align: center;
+    color: #1a3b5d;
+}

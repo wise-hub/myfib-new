@@ -1,7 +1,7 @@
 const BASE_URL = 'https://my.fibank.bg/EBank/api/v1';
 
 interface ApiClientOptions {
-  method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
+  method?: 'GET' | 'POST';
   endpoint: string;
   token: string;
   customer: string;
@@ -40,11 +40,9 @@ export async function apiClient({ method = 'GET', endpoint, token, customer, ref
     headers,
   });
 
-  const contentType = response.headers.get('content-type');
-  if (contentType && contentType.includes('application/json')) {
+  try {
     return await response.json();
-  } else {
-    const text = await response.text();
-    return { error: 'Unexpected response format', body: text, status: response.status };
+  } catch {
+    return { error: 'Failed to parse JSON response', status: response.status };
   }
 }

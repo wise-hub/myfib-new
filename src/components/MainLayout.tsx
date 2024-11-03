@@ -2,7 +2,6 @@ import { ReactNode } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import navStyles from '../styles/navigation.module.css';
-import '../styles/globals.css';
 
 interface MainLayoutProps {
   children: ReactNode;

@@ -15,15 +15,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const data = await apiClient({
-      method: req.method as 'GET' | 'POST' | 'PUT' | 'DELETE',
+      method: req.method as 'GET' | 'POST',
       endpoint,
       token,
       customer,
       referer,
     });
 
-    res.status(data.status || 200).json(data);
+    res.status(200).json(data);
   } catch (error) {
-    res.status(500).json({ error: 'Error forwarding request to Fibank API', details: error });
+    res.status(500).json({ error: 'Error forwarding request to Fibank API', details: String(error) });
   }
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation"; 
 import styles from "../styles/login.module.css";
 
 const LoginPage = () => {
@@ -11,7 +11,7 @@ const LoginPage = () => {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (token) {
-      router.push(`/auth#access_token=${token}`);
+      router.push(`/auth#token=${token}`);
     } else {
       setError("Token is required");
     }

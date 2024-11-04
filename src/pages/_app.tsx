@@ -1,22 +1,20 @@
-// src/pages/_app.tsx
-import type { AppProps } from 'next/app';
-import { useRouter } from 'next/router';
-import ProtectedRoute from '../components/ProtectedRoute';
-import MainLayout from '../components/MainLayout';
-import '../styles/globals.css';
+import type { AppProps } from "next/app";
+import { usePathname } from "next/navigation";
+import MainLayout from "../components/MainLayout";
+import "../styles/globals.css";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  const router = useRouter();
+  const pathname = usePathname();
 
-  const isLoginPage = router.pathname === '/login';
+  const noLayoutPaths = ["/login", "/auth"];
 
-  return isLoginPage ? (
-    <Component {...pageProps} />
+  const useMainLayout = !noLayoutPaths.includes(pathname);
+
+  return useMainLayout ? (
+    <MainLayout>
+      <Component {...pageProps} />
+    </MainLayout>
   ) : (
-      <ProtectedRoute>
-        <MainLayout>
-          <Component {...pageProps} />
-        </MainLayout>
-      </ProtectedRoute>
+    <Component {...pageProps} />
   );
 }
